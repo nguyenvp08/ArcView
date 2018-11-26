@@ -9,9 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.kotlin.andyho.animationdemo.R
 
-class ArcView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : View(context, attrs, defStyleAttr) {
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context?) : this(context, null, 0)
+class ArcView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, null, 0) {
 
     var rectF: RectF = RectF()
     var paint: Paint = Paint()
@@ -60,7 +58,7 @@ class ArcView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : View
 
         // calculate text position
         val yPos = rectF.top + rectF.height() * 3 / 4 + rectF.height() * Math.cos(Math.toRadians(degree.toDouble())) / 4 + rectText.height() / 2
-        val xPos = rectF.width() / 2 - rectText.width() / 2
+        val xPos = rectF.left + rectF.width() / 2 - rectText.width() / 2
         paint.color = textColorAtt ?: 0
         canvas?.drawText(textAtt, xPos, yPos.toFloat(), paint)
     }
