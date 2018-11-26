@@ -47,18 +47,19 @@ class ArcView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : View
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        var borderSize: Float = borderPaddingAtt ?: 0F
+        val borderSize: Float = borderPaddingAtt ?: 0F
         rectF.set(0F + paddingLeft + borderSize, 0F + paddingTop + borderSize, w.toFloat() - paddingRight - borderSize, h.toFloat() - paddingBottom - borderSize)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint.color = backgroundColorAtt ?: 0
-        canvas?.drawArc(rectF, 90 - degreeAtt!!.toFloat(), degreeAtt!! * 2F, false, paint)
+        val degree = degreeAtt?.toFloat() ?: 0F
+        canvas?.drawArc(rectF, 90 - degree, degree * 2F, false, paint)
         paint.getTextBounds(textAtt, 0, textAtt?.length ?: 0, rectText)
 
         // calculate text position
-        val yPos = rectF.top + rectF.height() * 3 / 4 + rectF.height() * Math.cos(Math.toRadians(degreeAtt!!.toDouble())) / 4 + rectText.height() / 2
+        val yPos = rectF.top + rectF.height() * 3 / 4 + rectF.height() * Math.cos(Math.toRadians(degree.toDouble())) / 4 + rectText.height() / 2
         val xPos = rectF.width() / 2 - rectText.width() / 2
         paint.color = textColorAtt ?: 0
         canvas?.drawText(textAtt, xPos, yPos.toFloat(), paint)
